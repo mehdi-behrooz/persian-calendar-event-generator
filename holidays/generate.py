@@ -4,6 +4,7 @@ import sys
 import re
 import datetime
 import uuid
+import logging
 
 CALENDAR = '''
 BEGIN:VCALENDAR
@@ -40,6 +41,7 @@ def run(input_file):
     
     events = ""
     for (date, title) in days:
+        logging.debug("creative event {} with title {} ...".format(date, title))
         start = date.strftime("%Y%m%d")
         end = (date + datetime.timedelta(days=1)).strftime("%Y%m%d")
         uid = "{}@google.com".format(uuid.uuid4().hex)
@@ -74,12 +76,15 @@ def parse(input_file):
 def convert_persian_date(persian_date):
     year, month, day = persian_date.split('/')
     date = i18n.to_gregorian(int(year), int(month), int(day))
+    logging.debug("persian date {} converted to gregorian equivalent {}".format(persian_date, date))
     return date
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate google calendar for holidays")
     parser.add_argument('input')
+    parser.add_argument('-d', '--debug', required=False, action='store_true')
     args = parser.parse_args()
     input_file = args.input
+    logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
     run(input_file)
