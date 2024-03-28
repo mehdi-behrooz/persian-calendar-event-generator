@@ -2,6 +2,36 @@ import datetime
 
 EPOCH = 226895
 
+PERSIAN_MONTHS = [
+    'فروردین',
+    'اردیبهشت',
+    'خرداد',
+    'تیر',
+    'مرداد',
+    'شهریور',
+    'مهر',
+    'آبان',
+    'آذر',
+    'دی',
+    'بهمن',
+    'اسفند'
+]
+
+PERSIAN_WEEKDAYS = [
+    'دوشنبه',
+    'سه‌شنبه',
+    'چهارشنبه',
+    'پنجشنبه',
+    'جمعه',
+    'شنبه',
+    'یکشنبه'
+]
+
+LATIN_DIGITS = '0123456789'
+PERSIAN_DIGITS = '۰۱۲۳۴۵۶۷۸۹'
+DIGIT_TABLE = str.maketrans(LATIN_DIGITS, PERSIAN_DIGITS)
+
+
 def to_gregorian(year, month, day):
     """Returns a date object corresponding to a specified Persian date."""
     k = EPOCH - 1
@@ -33,3 +63,5 @@ def to_jalali(date):
     return (year, month, day)
 
 
+def convert_digits_to_persian(number):
+    return str(number).translate(DIGIT_TABLE)
