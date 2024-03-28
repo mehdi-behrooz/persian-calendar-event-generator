@@ -21,8 +21,8 @@ def to_jalali(date):
     datetime object."""
     if isinstance(date, datetime.datetime):
         date = date.date()
-    year = (33 * (date.toordinal() - EPOCH) + 3) / 12053 + 1
-    day = (date - persiandate(year, 1, 1)).days
+    year = (33 * (date.toordinal() - EPOCH) + 3) // 12053 + 1
+    day = (date - to_gregorian(year, 1, 1)).days
     if day < 216:
         month = day // 31 + 1
         day = day % 31 + 1
