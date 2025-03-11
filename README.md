@@ -16,13 +16,14 @@ python3 days.py 2024-01-01 -n 5 -d
 ### Holiday Events Generator:
 This module helps creating events for Persian bank holidays. To use it, you should put the bank holidays of the year in a text file with their persian dates.  
 
-Generating bank holidays for the Persian year 1403:
+Generating bank holidays for the Persian year 1404:
 ```
-python3 generate.py input/1403.txt > output/1403.ics
+python3 holidays.py input/1404.txt > output/1404.ics
 ```
 To debug:
-```
-python3 input/1403.txt input/1403.txt -d
+
+```bash
+python3 holidays.py input/1403.txt -d
 ```
 
 
